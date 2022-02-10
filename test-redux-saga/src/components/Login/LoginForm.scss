@@ -1,0 +1,17 @@
+.login-form {
+  width: 400px;
+  margin: auto;
+  padding: 20px 10px;
+  .error-color {
+    border: 0.5px solid white;
+    background: #fcd1d1;
+    color: crimson;
+    border-radius: 5px;
+  }
+  .none {
+    display: none;
+  }
+  .margin-bottom {
+    margin-bottom: 15px;
+  }
+}

@@ -1,0 +1,18 @@
+.cart-container {
+  width: 80%;
+  padding: 20px 20px 10px;
+  background: crimson;
+  margin-right: auto;
+  margin-left: auto;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  h5 {
+    color: #2468a2;
+    font-weight: 600;
+  }
+  h6 {
+    color: crimson;
+    span {
+      color: #2468a2;
+    }
+  }
+}
