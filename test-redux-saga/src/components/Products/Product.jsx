@@ -1,10 +1,8 @@
 import {
   Box,
-  Button,
   CardMedia,
   IconButton,
   Paper,
-  TextField,
   Typography,
 } from "@material-ui/core";
 import { AddBox, InfoOutlined, LocalAtmOutlined } from "@material-ui/icons";
@@ -20,8 +18,7 @@ import "./Product.scss";
 export const Product = () => {
   const dispatch = useDispatch();
   const router = useHistory();
-  const products = useSelector((state) => state.shop);
-  const [qty, setQty] = useState(1);
+  const products = useSelector((state) => state.shop.graphqlData);
   const handleAddToCart = (id) => {
     dispatch(addToCart(id));
   };
@@ -31,8 +28,8 @@ export const Product = () => {
   };
   return (
     <Box className="container-box">
-      {products &&
-        products.graphqlData.map((product, index) => (
+      {products.products &&
+        products.products.map((product, index) => (
           <Paper key={index} elevation={10} className="product">
             <Box className="content-product">
               <Typography variant="h6">{product.name}</Typography>

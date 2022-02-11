@@ -4,7 +4,7 @@ import logger from "redux-logger";
 import { rootReducer } from "./rootReducer";
 import { rootSaga } from "./sagas";
 
-// const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
@@ -12,10 +12,7 @@ const composeEnhancers =
       })
     : compose;
 
-const middlewares = [
-  logger,
-  // , sagaMiddleware
-];
+const middlewares = [logger, sagaMiddleware];
 const enhancer = composeEnhancers(
   applyMiddleware(...middlewares)
   // other store enhancers if any
@@ -23,5 +20,5 @@ const enhancer = composeEnhancers(
 
 const store = createStore(rootReducer, enhancer);
 
-// sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(rootSaga);
 export default store;

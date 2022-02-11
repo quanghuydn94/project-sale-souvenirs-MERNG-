@@ -15,7 +15,9 @@ import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
-
+import ProtectedRoute from "./ProtectedRoute";
+import { AuthProvider } from "./context/auth";
+import { ManagePage } from "./pages/ManagePage";
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
   cache: new InMemoryCache(),
@@ -24,37 +26,37 @@ const client = new ApolloClient({
 export default function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-        <Router>
-          <Navbar />
-          <Switch>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-            <Route path="/products" exact>
-              <Stores />
-            </Route>
-            <Route path="/products/:id">
-              <DetailProduct />
-            </Route>
-            <Route path="/cart" exact>
-              <CartShopping />
-            </Route>
-            <Route path="/managed-products" exact>
+      <AuthProvider>
+        <div className="App">
+          <Router>
+            <Navbar />
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/products" exact component={Stores} />
+              <Route path="/products/:id" component={DetailProduct} />
+              <Route path="/cart" exact component={CartShopping} />
+              <Route path="/register" component={Register} />
+              <Route path="/login" component={Login} />
               <Layout>
-                <ManagedProducts />
+                <Route
+                  path="/managed-products"
+                  exact
+                  component={ManagedProducts}
+                />
+                <Route
+                  path="/managed-products/add-product"
+                  component={AddProduct}
+                />
               </Layout>
-            </Route>
-            <Route path="/managed-products/add-product">
               <Layout>
-                <AddProduct />
+                <ProtectedRoute path="/management">
+                  <ManagePage />
+                </ProtectedRoute>
               </Layout>
-            </Route>
-            <Route path="/register" component={Register}></Route>
-            <Route path="/login" component={Login}></Route>
-          </Switch>
-        </Router>
-      </div>
+            </Switch>
+          </Router>
+        </div>
+      </AuthProvider>
     </ApolloProvider>
   );
 }

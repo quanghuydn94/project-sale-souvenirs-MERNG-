@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
 import {
-  Paper,
   Table,
   TableBody,
   TableContainer,
@@ -8,9 +7,6 @@ import {
   TableRow,
   TextField,
 } from "@material-ui/core";
-import { Search } from "@material-ui/icons";
-import React from "react";
-import { useSelector } from "react-redux";
 import {
   deleteSingleProduct,
   updateProductData,
@@ -18,20 +14,17 @@ import {
 import { getProducts } from "../../../graphql-client/queries";
 import { TableBodyProducts } from "./TableBody";
 import { TableHeader } from "./TableHeader";
-import { useState } from "react";
-import { useRef } from "react";
 import { SearchBox } from "./SearchBox";
-import { useEffect } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
 export const TableProducts = () => {
   const refs = useRef();
-  const data = useSelector((state) => state.shop.graphqlData);
+  const data = useSelector((state) => state.shop.graphqlData.products);
   const [allProducts, setAllProducts] = useState(data);
-  useEffect(() => {
-    setAllProducts(data);
-  }, [data]);
   const [open, setOpen] = useState(false);
 
+  console.log(data);
   // Delete product
   const deleteProductById = (product) => {
     deleteProduct({
@@ -92,6 +85,7 @@ export const TableProducts = () => {
   const [editProduct] = useMutation(updateProductData);
 
   //Pagination
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const handleChangePage = (event, newPage) => {
@@ -118,9 +112,11 @@ export const TableProducts = () => {
           return item[key].toString().toLowerCase().includes(lowerCaseValue);
         });
       });
+      console.log(filteredData);
       setAllProducts(filteredData);
     }
   };
+
   return (
     <TableContainer style={{ background: "white" }}>
       <SearchBox searchTerm={searchTerm} handleSearch={handleSearch} />
@@ -128,8 +124,8 @@ export const TableProducts = () => {
       <Table>
         <TableHeader />
         <TableBody>
-          {allProducts &&
-            allProducts
+          {data &&
+            data
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((product, index) => (
                 <TableRow key={index}>
@@ -151,8 +147,8 @@ export const TableProducts = () => {
         ref={refs}
         component="div"
         rowsPerPageOptions={[5, 10, 15]}
-        count={data.length}
         rowsPerPage={rowsPerPage}
+        count={data ? data.length : 0}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}

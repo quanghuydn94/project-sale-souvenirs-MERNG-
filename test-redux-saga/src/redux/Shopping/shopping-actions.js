@@ -1,9 +1,21 @@
 import * as types from "./shopping-types";
 
-export const getProductData = (data) => {
+export const getProductData = (payload) => {
   return {
     type: types.GET_PRODUCTS,
-    payload: data.products,
+    payload,
+  };
+};
+export const getProductSuccess = (payload) => {
+  return {
+    type: types.GET_PRODUCTS_SUCCESS,
+    payload,
+  };
+};
+export const getProductFailed = (payload) => {
+  return {
+    type: types.GET_PRODUCTS_FAILED,
+    payload,
   };
 };
 

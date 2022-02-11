@@ -1,13 +1,15 @@
 import { put, call } from "redux-saga/effects";
-import { getProducts } from "../../../graphql-client/queries";
-import { getProductData } from "../../Shopping/shopping-actions";
+import { getProducts } from "../../../util/api";
+import {
+  getProductFailed,
+  getProductSuccess,
+} from "../../Shopping/shopping-actions";
 
 export function* handlerProduct() {
   try {
-    const data = yield call(getProducts);
-    console.log(data);
-    yield put(getProductData(data));
+    const response = yield call(getProducts);
+    yield put(getProductSuccess(response));
   } catch (error) {
-    console.log("error");
+    yield put(getProductFailed(error.message));
   }
 }

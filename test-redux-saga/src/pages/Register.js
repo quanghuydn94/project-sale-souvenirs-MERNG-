@@ -32,7 +32,6 @@ export const Register = () => {
     });
   };
   const [addUser, dataMutation] = useMutation(registerUser);
-  console.log(newUser);
   return (
     <RegisterForm
       newUser={newUser}

@@ -6,7 +6,13 @@
     border: 0.5px solid white;
     background: #fcd1d1;
     color: crimson;
+    padding: 10px;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    sup {
+      cursor: pointer;
+    }
   }
   .none {
     display: none;

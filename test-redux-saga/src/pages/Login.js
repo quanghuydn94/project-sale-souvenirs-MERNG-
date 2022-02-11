@@ -1,10 +1,12 @@
 import { useMutation } from "@apollo/client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { LoginForm } from "../components/Login/LoginForm";
 import { login } from "../graphql-client/mutation";
+import { AuthContext } from "../context/auth";
 
 export const Login = () => {
+  const context = useContext(AuthContext);
   const [errors, setErrors] = useState({});
   const router = useHistory();
   const [loginUser, setLoginUser] = useState({
@@ -25,8 +27,14 @@ export const Login = () => {
       onError(ApolloError) {
         setErrors(ApolloError.graphQLErrors[0].extensions.errors);
       },
-      update(proxy, result) {
-        router.push("/managed-products");
+      update(_, result) {
+        const user = result.data.login;
+        context.login(user);
+        if (user) {
+          router.push("/management");
+        } else {
+          router.push("/");
+        }
       },
     });
     setLoginUser({

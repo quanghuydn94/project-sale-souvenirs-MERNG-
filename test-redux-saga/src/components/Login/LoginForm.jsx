@@ -29,10 +29,8 @@ export const LoginForm = ({
           </Typography>
           {errors.general != null ? (
             <Box className="error-color">
-              <Typography variant="body2">
-                {errors.general}
-                <sup onClick={closeError}>&#128473;</sup>
-              </Typography>
+              <Typography variant="body2">{errors.general}</Typography>
+              <sup onClick={closeError}>&#128473;</sup>
             </Box>
           ) : null}
           <TextField
