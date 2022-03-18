@@ -1,13 +1,13 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { UserInputError } = require('apollo-server-express');
-const Product = require('../../models/Product');
-const User = require('../../models/User');
-const Article = require('../../models/Article');
+const Product = require('../models/Product');
+const User = require('../models/User');
+const Article = require('../models/Article');
 const {
     validateLoginInput,
     validateRegisterInput,
-} = require('../../utils/validator');
+} = require('../utils/validator');
 const { SECRET_KEY } = require('../../../test-redux-saga/config');
 
 function generateToken(user) {
