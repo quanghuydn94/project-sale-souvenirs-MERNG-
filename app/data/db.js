@@ -8,7 +8,7 @@ const {
     validateLoginInput,
     validateRegisterInput,
 } = require('../utils/validator');
-const { SECRET_KEY } = require('../../../test-redux-saga/config');
+const { SECRET_KEY } = require('../../config');
 
 function generateToken(user) {
     return jwt.sign(
