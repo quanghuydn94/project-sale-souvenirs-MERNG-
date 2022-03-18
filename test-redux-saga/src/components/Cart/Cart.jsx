@@ -5,10 +5,18 @@ import { Link } from "react-router-dom";
 import "./Cart.scss";
 import { CartItem } from "./CartItem";
 
-export const Cart = ({ cart, deleteCartItem, onChangeQty }) => {
+export const Cart = ({ deleteCartItem, onChangeQty }) => {
+  const [cart, setCart] = useState([]);
+  const [avoidReading, setAvoidReading] = useState(false);
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+
   useEffect(() => {
+    if (!cart.length && !avoidReading) {
+      const jsonCarts = localStorage.getItem("carts");
+      const localCarts = JSON.parse(jsonCarts);
+      setCart(localCarts);
+    }
     let items = 0;
     let price = 0;
 
@@ -19,7 +27,28 @@ export const Cart = ({ cart, deleteCartItem, onChangeQty }) => {
 
     setTotalItems(items);
     setTotalPrice(price);
-  }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
+  }, [
+    cart,
+    avoidReading,
+    cart,
+    totalPrice,
+    totalItems,
+    setTotalPrice,
+    setTotalItems,
+  ]);
+
+  // useEffect(() => {
+  //   let items = 0;
+  //   let price = 0;
+
+  //   cart.forEach((item) => {
+  //     items += item.qty;
+  //     price += item.qty * item.price;
+  //   });
+
+  //   setTotalItems(items);
+  //   setTotalPrice(price);
+  // }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
 
   const checkout = () => {};
   return (

@@ -1,15 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap');
 .left-bar {
-  color: #2468a2;
-  position: fixed;
-  ul a {
-    text-decoration: none;
-    li {
-      margin-bottom: 5px;
-      &:hover {
-        background: #2468a2;
-        border-radius: 5px;
-        color: white;
-      }
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    ul {
+        position: fixed;
+        text-align: center;
+        a {
+            position: relative;
+            text-decoration: none;
+            width: 100%;
+            li {
+                position: relative;
+                width: 100%;
+                font-family: 'Comfortaa', cursive, monospace;
+                margin-bottom: 5px;
+                color: white;
+                &:hover {
+                    background: white;
+                    border-radius: 5px;
+                    color: #2468a2;
+                }
+            }
+        }
     }
-  }
 }

@@ -1,6 +1,16 @@
-import { all } from "redux-saga/effects";
-import { productWatcher } from "./watchers/product";
+import { all } from 'redux-saga/effects';
+import {
+    getCurrentProduct,
+    productWatcher,
+    articleWatcher,
+    addNewArticle,
+} from './watchers/product';
 
 export function* rootSaga() {
-  yield all([productWatcher()]);
+    yield all([
+        productWatcher(),
+        getCurrentProduct(),
+        articleWatcher(),
+        addNewArticle(),
+    ]);
 }

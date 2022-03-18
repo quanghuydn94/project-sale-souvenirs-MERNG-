@@ -1,31 +1,34 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
-import "./Snackbar.scss";
-const SnackbarNoti = forwardRef((props, ref) => {
-  const [showSnackbar, setShowSnackbar] = useState(false);
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 
-  useImperativeHandle(ref, () => ({
-    show() {
-      setShowSnackbar(true);
-      setTimeout(() => {
-        setShowSnackbar(false);
-      }, 3000);
-    },
-  }));
-  return (
-    <div
-      className="snackbar"
-      id={showSnackbar ? "show" : "hide"}
-      style={{
-        backgroundColor: props.type === "success" ? "#00F593" : "#FF0033",
-        color: props.type === "success" ? "black" : "white",
-      }}
-    >
-      <div className="symbol">
-        {props.type === "success" ? <h1>&#x2713;</h1> : <h1>&#x2613;</h1>}
-      </div>
-      <div className="message">{props.message}</div>
-    </div>
-  );
-});
+import { CheckCircle } from '@material-ui/icons';
+
+function SnackbarNoti({ classes, ...propsSnackbar }) {
+    return (
+        <div style={{ width: '100%' }}>
+            <Snackbar {...propsSnackbar}>
+                <SnackbarContent
+                    style={{
+                        backgroundColor: '#084376',
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}
+                    message={
+                        <span
+                            id="client-snackbar"
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                marginLeft: 45,
+                            }}
+                        >
+                            Đã thêm thành công! <CheckCircle />
+                        </span>
+                    }
+                />
+            </Snackbar>
+        </div>
+    );
+}
 
 export default SnackbarNoti;

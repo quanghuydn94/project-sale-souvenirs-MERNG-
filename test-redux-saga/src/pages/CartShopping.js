@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Cart } from "../components/Cart/Cart";
@@ -7,6 +7,11 @@ import { adjustQty, removeFromCart } from "../redux/Shopping/shopping-actions";
 export const CartShopping = () => {
   const cart = useSelector((state) => state.shop.cart);
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (cart.length) {
+      localStorage.setItem("carts", JSON.stringify(cart));
+    }
+  }, []);
   const handleDeleteCartItem = (id) => {
     dispatch(removeFromCart(id));
   };
@@ -15,11 +20,7 @@ export const CartShopping = () => {
   };
   return (
     <div>
-      <Cart
-        cart={cart}
-        deleteCartItem={handleDeleteCartItem}
-        onChangeQty={onChangeQty}
-      />
+      <Cart deleteCartItem={handleDeleteCartItem} onChangeQty={onChangeQty} />
     </div>
   );
 };

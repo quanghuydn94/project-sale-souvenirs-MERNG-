@@ -1,44 +1,51 @@
-import { Box, Button, Paper, TextField, Typography } from '@material-ui/core';
+import {
+    Box,
+    Button,
+    Paper,
+    TextField,
+    Typography,
+    Slide,
+} from '@material-ui/core';
 import React from 'react';
-import './CreateProduct.scss';
+import './CreateArticle.scss';
 import SnackbarNoti from '../Snackbar/Snackbar';
 import ContentEditor from './ContentEdit';
-const SnackbarType = {
-    success: 'success',
-    fail: 'fail',
-};
+import { useSelector } from 'react-redux';
 
-export const CreateProduct = ({
+function TransitionRight(props) {
+    return <Slide {...props} direction="right" />;
+}
+
+export const CreateArticle = ({
     onChangeInput,
-    newProduct,
-    onAddProduct,
-    snackRef,
+    newArticle,
+    onAddArticle,
     handleChangeEditor,
+    transition,
+    success,
 }) => {
+    console.log(success);
     return (
-        <Box component="div" className="create-product">
-            <form onSubmit={onAddProduct}>
+        <Box component="div" className="create-article">
+            <SnackbarNoti
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                open={success}
+                autoHideDuration={4000}
+                TransitionComponent={transition}
+            />
+            <form onSubmit={(event) => onAddArticle(event, TransitionRight)}>
                 <Paper elevation={10}>
                     <Typography gutterBottom variant="h5">
-                        New Product
+                        New Article
                     </Typography>
-                    <TextField
-                        variant="outlined"
-                        className="input-create"
-                        name="name"
-                        label="Name"
-                        onChange={onChangeInput}
-                        value={newProduct.name}
-                        fullWidth
-                        required
-                    />
+
                     <TextField
                         variant="outlined"
                         className="input-create"
                         name="title"
                         label="Title"
                         onChange={onChangeInput}
-                        value={newProduct.title}
+                        value={newArticle.title}
                         fullWidth
                         required
                     />
@@ -48,7 +55,7 @@ export const CreateProduct = ({
                         name="description"
                         label="Description"
                         onChange={onChangeInput}
-                        value={newProduct.description}
+                        value={newArticle.description}
                         fullWidth
                         required
                     />
@@ -58,17 +65,7 @@ export const CreateProduct = ({
                         name="image"
                         label="Address image"
                         onChange={onChangeInput}
-                        value={newProduct.image}
-                        fullWidth
-                        required
-                    />
-                    <TextField
-                        variant="outlined"
-                        className="input-create"
-                        name="price"
-                        label="Price"
-                        onChange={onChangeInput}
-                        value={newProduct.price}
+                        value={newArticle.image}
                         fullWidth
                         required
                     />
@@ -86,11 +83,6 @@ export const CreateProduct = ({
                     </Button>
                 </Paper>
             </form>
-            <SnackbarNoti
-                ref={snackRef}
-                message="Task Completed"
-                type={SnackbarType.success}
-            />
         </Box>
     );
 };

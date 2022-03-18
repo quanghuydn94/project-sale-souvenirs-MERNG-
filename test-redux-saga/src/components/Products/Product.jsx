@@ -22,9 +22,8 @@ export const Product = () => {
   const handleAddToCart = (id) => {
     dispatch(addToCart(id));
   };
-  const handleViewDetail = (id) => {
-    router.push(`/products/${id}`);
-    dispatch(loadCurrentItem(id));
+  const handleViewDetail = (product) => {
+    router.push(`/products/${product.id}`);
   };
   return (
     <Box className="container-box">
@@ -48,7 +47,7 @@ export const Product = () => {
                 <IconButton
                   className="view-detail-product"
                   size="small"
-                  onClick={() => handleViewDetail(product.id)}
+                  onClick={() => handleViewDetail(product)}
                 >
                   <InfoOutlined />
                 </IconButton>

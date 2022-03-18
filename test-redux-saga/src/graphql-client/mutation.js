@@ -32,6 +32,7 @@ const addSingleProduct = gql`
     $title: String
     $image: String
     $price: Int
+    $content: String
   ) {
     createProduct(
       name: $name
@@ -39,12 +40,14 @@ const addSingleProduct = gql`
       title: $title
       image: $image
       price: $price
+      content: $content
     ) {
       name
       description
       title
       image
       price
+      content
     }
   }
 `;

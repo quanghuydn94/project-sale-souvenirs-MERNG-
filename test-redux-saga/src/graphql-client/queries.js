@@ -9,6 +9,7 @@ const getProducts = gql`
       description
       image
       price
+      content
     }
   }
 `;

@@ -30,7 +30,7 @@ export const Login = () => {
       update(_, result) {
         const user = result.data.login;
         context.login(user);
-        if (user) {
+        if (user.role === "admin") {
           router.push("/management");
         } else {
           router.push("/");
