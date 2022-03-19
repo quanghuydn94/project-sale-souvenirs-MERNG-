@@ -1,6 +1,6 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-const { ApolloServerPluginLandingPageDisabled } = require('apollo-server-core');
+const { ApolloServerPluginLandingPageLocalDefault  } = require('apollo-server-core');
 
 
 const mongoose = require('mongoose');
@@ -34,7 +34,7 @@ const server = new ApolloServer({
     typeDefs,
     resolvers,
     context: () => ({ mongoDataMethods }),
-        plugins: [ApolloServerPluginLandingPageDisabled()],
+        plugins: [ApolloServerPluginLandingPageLocalDefault ()],
 
 });
 
