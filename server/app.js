@@ -1,5 +1,7 @@
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
+import { ApolloServerPluginLandingPageDisabled } from 'apollo-server-core';
+
 const mongoose = require("mongoose");
 
 //Load schema & resolvers
@@ -32,6 +34,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: () => ({ mongoDataMethods }),
+  plugins: [ApolloServerPluginLandingPageDisabled()],
 });
 
 const app = express();
