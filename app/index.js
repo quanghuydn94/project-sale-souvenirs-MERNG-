@@ -1,6 +1,7 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-import { ApolloServerPluginLandingPageDisabled } from 'apollo-server-core';
+const { ApolloServerPluginLandingPageDisabled } = require('apollo-server-core');
+
 
 const mongoose = require('mongoose');
 
